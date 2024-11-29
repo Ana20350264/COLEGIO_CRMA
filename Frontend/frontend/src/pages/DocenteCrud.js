@@ -21,10 +21,11 @@ const DocenteCrud = () => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    fetch(`${BASE_URL}/home`)
+    fetch('http://192.168.0.20:3001/api/estudiantes')
       .then((response) => response.json())
       .then((data) => {
         console.log('Datos obtenidos del backend:', data); // Log inicial de datos
+        
   
         const estudiantesConPromedio = data.map((estudiante) => {
           const actividades = estudiante.actividades || [];
@@ -130,14 +131,14 @@ const DocenteCrud = () => {
   
     const eliminarEstudiante = (id) => {
       if (window.confirm('¿Deseas eliminar este estudiante?')) {
-        fetch(`http://localhost:3001/api/estudiantes/${id}`, { method: 'DELETE' })
+        fetch(`http://192.168.0.20:3001/api/estudiantes/${id}`, { method: 'DELETE' })
           .then(() => setEstudiantes(estudiantes.filter((e) => e.id_estudiante !== id)))
           .catch((error) => console.error('Error al eliminar estudiante:', error));
       }
     };
   
     const agregarEstudiante = () => {
-      fetch('http://localhost:3001/api/estudiantes', {
+      fetch('http://192.168.0.20:3001/api/estudiantes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newStudent),
