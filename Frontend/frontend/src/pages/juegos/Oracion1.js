@@ -12,6 +12,7 @@ import {
   SubmitButton,
   NavigationButtons,
 } from '../../styles/OracionStyles';
+import BASE_URL from '../../config/apiConfig';
 
 function HomePage() {
   const [data, setData] = useState(null);
@@ -20,7 +21,7 @@ function HomePage() {
 
   useEffect(() => {
     const fetchProtectedData = async () => {
-      const response = await fetch('http://localhost:3001/home', {
+      const response = await fetch(`${BASE_URL}/home`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,  // Enviamos el token en la cabecera Authorization
@@ -65,7 +66,7 @@ function HomePage() {
     useEffect(() => {
       const fetchOptions = async () => {
         try {
-          const response = await fetch('http://localhost:3001/api/getOptions'); // Ruta para obtener las opciones
+          const response = await fetch('http://192.168.0.20:3001/api/getOptions'); // Ruta para obtener las opciones
           const data = await response.json();
           console.log('Opciones recibidas:', data);  // Verifica los datos
           setOptions(data); // Establecer las opciones que recibimos del servidor
@@ -101,7 +102,7 @@ function HomePage() {
 // Función para enviar los resultados
 const enviarResultados = async (score) => {
   try {
-    const response = await fetch('http://localhost:3001/api/saveResults', {
+    const response = await fetch('http://192.168.0.20:3001/api/saveResults', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`, // Token para autenticación
@@ -336,8 +337,8 @@ const enviarResultados = async (score) => {
       <Title>Activity 1. Complete the sentences</Title>
       <OracionActivity /> {/* Componente de la actividad */}
       <NavigationButtons>
-          <button><Link to="/subtema1">Anterior</Link></button>
-          <button><Link to="/unir1">Siguiente</Link></button>
+          <Link to="/subtema1"><button>Anterior</button></Link>
+          <Link to="/unir1"><button>Siguiente</button></Link>
         </NavigationButtons>
       <Footer /> {/* Incluimos el Footer */}
     </HomeContainer>

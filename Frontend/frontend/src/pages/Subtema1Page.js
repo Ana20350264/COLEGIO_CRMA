@@ -15,6 +15,7 @@ import {
   SubtemaList2
 } from '../styles/Subtema'; // Importa todos los estilos necesarios
 import Video from '../img/Simple Present.mp4';
+import BASE_URL from '../config/apiConfig';
 
 function HomePage() {
   const [data, setData] = useState(null);
@@ -23,7 +24,7 @@ function HomePage() {
   useEffect(() => {
     const fetchProtectedData = async () => {
       try {
-        const response = await fetch('http://localhost:3001/home', {
+        const response = await fetch(`${BASE_URL}/home`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`, // Enviamos el token en la cabecera Authorization
@@ -103,14 +104,14 @@ function HomePage() {
 
         <ActivitiesSection>
           <h3>Actividades:</h3>
-          <ActivityButton><Link to="/oracion1">Completa la oración</Link></ActivityButton>
-          <ActivityButton><Link to="/unir1">Conectar palabras</Link></ActivityButton>
-          <ActivityButton><Link to="/crucigrama1">Crucigrama</Link></ActivityButton>
+          <Link to="/oracion1"><ActivityButton>Completa la oración</ActivityButton></Link>
+          <Link to="/unir1"><ActivityButton>Conectar palabras</ActivityButton></Link>
+          <Link to="/crucigrama1"><ActivityButton>Crucigrama</ActivityButton></Link>
         </ActivitiesSection>
 
         <NavigationButtons>
-          <button><Link to="/home">Anterior</Link></button>
-          <button><Link to="/oracion1">Siguiente</Link></button>
+          <Link to="/home"><button>Anterior</button></Link>
+          <Link to="/oracion1"><button>Siguiente</button></Link>
         </NavigationButtons>
       </SubtemaContainer>
 

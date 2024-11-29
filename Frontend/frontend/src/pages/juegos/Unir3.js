@@ -18,6 +18,7 @@ import img2 from '../../img/tema3/5study.jpg';
 import img3 from '../../img/tema3/4physics.jpg';
 import img4 from '../../img/tema3/2fall.jpg';
 import img5 from '../../img/tema3/1search.jpg';
+import BASE_URL from '../../config/apiConfig';
 
 function HomePage() {
   const [data, setData] = useState(null);
@@ -48,7 +49,7 @@ function HomePage() {
   useEffect(() => {
     const fetchProtectedData = async () => {
       try {
-        const response = await fetch('http://localhost:3001/home', {
+        const response = await fetch(`${BASE_URL}/home`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`, 
@@ -69,7 +70,7 @@ function HomePage() {
 
     const fetchAnswers = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/getCorrectAnswers');
+        const response = await fetch('http://192.168.0.20:3001/api/getCorrectAnswers');
         if (!response.ok) {
           throw new Error('Error al obtener respuestas correctas');
         }
@@ -115,7 +116,7 @@ function HomePage() {
 
     const enviarResultados = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/saveResults', {
+        const response = await fetch('http://192.168.0.20:3001/api/saveResults', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`,

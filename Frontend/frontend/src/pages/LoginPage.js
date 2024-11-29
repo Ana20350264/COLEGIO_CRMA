@@ -13,6 +13,7 @@ import {
   EyeIcon // Importa el nuevo estilo para el ícono
 } from '../styles/LoginStyles';
 
+
 function Login() {
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
@@ -36,7 +37,7 @@ function Login() {
     }
 
     try {
-      const response = await fetch('http://localhost:3001/login', {
+      const response = await fetch('http://192.168.0.20:3001/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -13,6 +13,7 @@ import {
   Pista,
   NavigationButtons,
 } from "../../styles/CrucigramaStyles";
+import BASE_URL from '../../config/apiConfig';
 
 function HomePage() {
   const [answers, setAnswers] = useState(Array(64).fill(""));
@@ -36,7 +37,7 @@ function HomePage() {
   // Fetch user data
   useEffect(() => {
     const fetchProtectedData = async () => {
-      const response = await fetch("http://localhost:3001/home", {
+      const response = await fetch(`${BASE_URL}/home`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -55,7 +56,7 @@ function HomePage() {
   useEffect(() => {
     const fetchCorrectAnswers = async () => {
       try {
-        const response = await fetch("http://localhost:3001/api/getAllAnswers", {
+        const response = await fetch("http://192.168.0.20:3001/api/getAllAnswers", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -143,7 +144,7 @@ function HomePage() {
 
   const enviarResultados = async (score) => {
     try {
-      const response = await fetch("http://localhost:3001/api/saveResults", {
+      const response = await fetch("http://192.168.0.20:3001/api/saveResults", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

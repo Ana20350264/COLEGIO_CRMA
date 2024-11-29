@@ -12,6 +12,7 @@ import {
   ActivityButton,
   NavigationButtons
 } from '../styles/Subtema'; // Importa todos los estilos necesarios
+import BASE_URL from '../config/apiConfig';
 
 function HomePage() {
   const [data, setData] = useState(null);
@@ -19,7 +20,7 @@ function HomePage() {
 
   useEffect(() => {
     const fetchProtectedData = async () => {
-      const response = await fetch('http://localhost:3001/home', {
+      const response = await fetch(`${BASE_URL}/home`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,  // Enviamos el token en la cabecera Authorization
@@ -77,9 +78,9 @@ function HomePage() {
 
         <ActivitiesSection>
           <h3>Actividades:</h3>
-          <ActivityButton><Link to="/oracion6">Completa la oración</Link></ActivityButton>
-          <ActivityButton><Link to="/unir6">Conectar palabras</Link></ActivityButton>
-          <ActivityButton><Link to="/crucigrama6">Crucigrama</Link></ActivityButton>
+          <Link to="/oracion6"><ActivityButton>Completa la oración</ActivityButton></Link>
+          <Link to="/unir6"><ActivityButton>Conectar palabras</ActivityButton></Link>
+          <Link to="/crucigrama6"><ActivityButton>Crucigrama</ActivityButton></Link>
         </ActivitiesSection>
 
         <NavigationButtons>

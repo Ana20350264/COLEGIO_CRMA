@@ -5,16 +5,15 @@ const mysql = require('mysql2');
 const app = express();
 const port = 3001;
 
-
 // Clave secreta para JWT
 const SECRET_KEY = 'tu_secreto_super_seguro';
 
-// Conexión a la base de datos
+// Configuración de la base de datos
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'colegiocrma'
+    database: 'colegiocrma',
 });
 
 db.connect((err) => {
@@ -25,32 +24,34 @@ db.connect((err) => {
     console.log('Conectado a la base de datos');
 });
 
-// Middleware
-app.use(cors());
+// **Configuración de CORS**
+// Permite el acceso desde dispositivos en la misma red local
+app.use(cors({
+    origin: '*', // Permitir peticiones desde cualquier origen
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
+    allowedHeaders: ['Content-Type', 'Authorization'], // Cabeceras permitidas
+}));
+
+// Middleware para leer JSON
 app.use(express.json());
 
 // Middleware para registrar las solicitudes entrantes
 app.use((req, res, next) => {
-  console.log(`Nueva solicitud: ${req.method} ${req.url}`);
-  next(); // Continúa con la siguiente ruta o middleware
+    console.log(`Solicitud: ${req.method} ${req.url}`);
+    next();
 });
 
 // Middleware para verificar el JWT
 const verifyToken = (req, res, next) => {
     const token = req.headers['authorization'];
-
     if (!token) {
         return res.status(403).json({ message: 'Token requerido' });
     }
-
     const tokenPart = token.split(' ')[1]; // Quitamos "Bearer" del token
-
     jwt.verify(tokenPart, SECRET_KEY, (err, decoded) => {
         if (err) {
             return res.status(401).json({ message: 'Token inválido' });
         }
-
-        // Guardamos los datos del usuario en la request para usar después
         req.user = decoded;
         next();
     });
@@ -375,7 +376,8 @@ app.delete('/api/estudiantes/:id', (req, res) => {
 
 
 // Iniciar el servidor
-app.listen(port, () => {
-    console.log(`Servidor escuchando en http://localhost:${port}`);
-});
-
+  const ip = '192.168.0.20'; // Reemplaza con tu dirección IP local
+  app.listen(port, ip, () => {
+    console.log(`Servidor escuchando en http://${ip}:${port}`);
+  });
+  

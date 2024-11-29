@@ -13,6 +13,7 @@ import {
   HeaderContainer,
 } from '../styles/DocenteCrudStyles';
 import Navbar from '../components/NavbarDocente';
+import BASE_URL from '../config/apiConfig';
 
 const DocenteCrud = () => {
   const [estudiantes, setEstudiantes] = useState([]);
@@ -20,7 +21,7 @@ const DocenteCrud = () => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/estudiantes')
+    fetch(`${BASE_URL}/home`)
       .then((response) => response.json())
       .then((data) => {
         console.log('Datos obtenidos del backend:', data); // Log inicial de datos

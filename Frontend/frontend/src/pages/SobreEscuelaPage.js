@@ -9,6 +9,7 @@ import {
   SubtemaContent,
   NavigationButtons
 } from '../styles/Subtema'; // Importa todos los estilos necesarios
+import BASE_URL from '../config/apiConfig';
 {/*import subtema2 from '../img/habito.jpg' */}
 
 function HomePage() {
@@ -17,7 +18,7 @@ function HomePage() {
 
   useEffect(() => {
     const fetchProtectedData = async () => {
-      const response = await fetch('http://localhost:3001/home', {
+      const response = await fetch(`${BASE_URL}/home`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,  // Enviamos el token en la cabecera Authorization
@@ -55,7 +56,7 @@ function HomePage() {
         </SubtemaContent>
 
         <NavigationButtons>
-          <button><Link to="/home">Inicio</Link></button>
+          <Link to="/home"><button>Inicio</button></Link>
         </NavigationButtons>
       </SubtemaContainer>   
 

@@ -12,6 +12,8 @@ import tema4 from '../img/tema4.png'
 import tema5 from '../img/tema5.png'
 import tema6 from '../img/tema6.jpg'
 import { Link } from 'react-router-dom';
+import BASE_URL from '../config/apiConfig';
+
 
 function HomePage() {
   const [data, setData] = useState(null);
@@ -19,12 +21,12 @@ function HomePage() {
 
   useEffect(() => {
     const fetchProtectedData = async () => {
-      const response = await fetch('http://localhost:3001/home', {
+      const response = await fetch(`${BASE_URL}/home`, {
         method: 'GET',
         headers: {
-          'Authorization': `Bearer ${token}`,  // Enviamos el token en la cabecera Authorization
-          'Content-Type': 'application/json'
-        }
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
       });
 
       const result = await response.json();

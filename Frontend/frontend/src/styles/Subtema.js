@@ -87,34 +87,66 @@ export const ImageSub = styled.img`
 `;
 
 
-// Sección de actividades
 export const ActivitiesSection = styled.div`
-  margin-bottom: 20px;
-  margin-top: 70px;
+  display: block;  
+  width: 50%;
+  margin: 7px auto;
 
   h3 {
     text-align: center;
     margin-bottom: 15px;
   }
+
+  /* Añadir estilos para los botones como lista */
+  div {
+    display: flex;
+    flex-direction: column; /* Botones uno debajo del otro */
+    gap: 10px; /* Espaciado entre los botones */
+    align-items: center; /* Centrar botones horizontalmente */
+  }
+
+  button {
+    padding: 10px 60px;
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #0023b3;
+    }
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
 `;
 
-// Botón para las actividades
+
+// Botón para las actividades 
+//no lo uso
 export const ActivityButton = styled.button`
   display: block;
-  width: 80%;
+  width: 50%;
   margin: 7px auto;
-  padding: 10px;
-  background-color: #0056b3;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1.1rem;
-  transition: background-color 0.3s;
+  
+    padding: 10px 20px;
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
 
   &:hover {
     background-color: #0023b3;
   }
+
     a {
     color: white;
     text-decoration: none;

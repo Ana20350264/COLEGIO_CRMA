@@ -13,6 +13,8 @@ import {
   ImageSub
 } from '../styles/Subtema'; // Importa todos los estilos necesarios
 import subtema2 from '../img/habito.jpg'
+import BASE_URL from '../config/apiConfig';
+
 
 function HomePage() {
   const [data, setData] = useState(null);
@@ -20,7 +22,7 @@ function HomePage() {
 
   useEffect(() => {
     const fetchProtectedData = async () => {
-      const response = await fetch('http://localhost:3001/home', {
+      const response = await fetch(`${BASE_URL}/home`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,  // Enviamos el token en la cabecera Authorization
@@ -55,14 +57,14 @@ function HomePage() {
 
         <ActivitiesSection>
           <h3>Actividades:</h3>
-          <ActivityButton><Link to="/oracion2">Completa la oración</Link></ActivityButton>
-          <ActivityButton><Link to="/unir2">Conectar palabras</Link></ActivityButton>
-          <ActivityButton><Link to="/crucigrama2">Crucigrama</Link></ActivityButton>
+          <Link to="/oracion2"><ActivityButton>Completa la oración</ActivityButton></Link>
+          <Link to="/unir2"><ActivityButton>Conectar palabras</ActivityButton></Link>
+          <Link to="/crucigrama2"><ActivityButton>Crucigrama</ActivityButton></Link>
         </ActivitiesSection>
 
         <NavigationButtons>
-          <button><Link to="/crucigrama1">Anterior</Link></button>
-          <button><Link to="/oracion2">Siguiente</Link></button>
+          <Link to="/crucigrama1"><button>Anterior</button></Link>
+          <Link to="/oracion2"><button>Siguiente</button></Link>
         </NavigationButtons>
       </SubtemaContainer>   
 
